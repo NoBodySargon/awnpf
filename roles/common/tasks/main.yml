@@ -1,3 +1,5 @@
 ---
 - name: Allow access to WebServers
-  ufw: rule=allow port={{ httpd_port }}
+  ufw: 
+    rule:allow 
+    port:{{ httpd_port }}

@@ -1,0 +1,15 @@
+---
+#- name: BAckup mySQL all databases with ansible built_in commands
+#  mysql_db:
+#    state: dump
+#    name: all
+#    target: /tmp/{{inventory_hostname}}_{{ '%Y-%m-%d' | strftime }}.sql
+#  delegate_to: localhost  
+   
+- name: Backup MySQL with archive of main folder of mysql
+  archive: 
+    path: /var/lib/mysql
+    dest: /tmp/{{inventory_hostname}}_mysql-bkp_{{ '%Y-%m-%d' | strftime }}.tar.bz2
+  delegate_to: localhost  
+     
+     

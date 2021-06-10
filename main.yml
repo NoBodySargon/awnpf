@@ -1,0 +1,16 @@
+---
+- hosts: host3
+  remote_user: root
+  tasks:
+   - name: Show date Tiome
+     command: echo  {{ '%Y-%m-%d' | strftime }}
+
+   - name: Docker start
+     apt:
+       name: docker.io
+       state: present
+     
+#   - name: Install mysql
+#     roles:
+#       -  mysql
+   

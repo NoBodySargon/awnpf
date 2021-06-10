@@ -1,29 +1,42 @@
-## WordPress+Nginx+PHP7.0-FPM Deployment
+Домашняя работа номер 4 курса "Системы управления конфигурациями"
 
-- Requires Ansible 1.2 or newer
-- Expects Ubuntu Trusty (14.04) hosts
+Состоит из следующих задач:
+    Установка приложения
 
-These playbooks deploy a simple all-in-one configuration of the popular
-WordPress blogging platform and CMS, frontend by the Nginx web server and the
-PHP-FPM process manager. To use, copy the `hosts.example` file to `hosts` and
-edit the `hosts` inventory file to include the names or URLs of the servers
-you want to deploy.
+    1) MySQL
+    1.1*) Выполнить установку MqSQL в виде роли, перед установкой DB, выполнить бекапирование (любое подходящее)
 
-Then run the playbook, like this:
+    2) WordPress
 
-	ansible-playbook -i hosts site.yml
+    3) FPM
 
-The playbooks will configure MySQL, WordPress, Nginx, and PHP-FPM. When the run
-is complete, you can hit access server to begin the WordPress configuration.
+    4) nginx
+    4.1*) Перед установкой сделать бекап статического содержимого (www, htdocs). Также сделать бекапирование конфигурации (conf.d), размесить конфигурацию в каталоге $HOME/backups/nginx/$(date) (Например, /home/app_tech/backups/nginx/2021-06-20_14_20_24
 
-### Ideas for Improvement
+    5*) Развернуть приложение в докере FTP-сервер, настроить проексировать через nginx
 
-Here are some ideas for ways that these playbooks could be extended:
+Заметки:
+- Попытаться настроить yamllint, ansible-lint.
+- Ознокомитсья с документацией molecule https://molecule.readthedocs.io/en/latest/installation.html
+- Будет плюсом, если ДЗ будет сдана в виде Pull request в github/gitlab/bitbucket
 
-- Parameterize the WordPress deployment to handle multi-site configurations.
-- Separate the components (PHP7.0-FPM, MySQL, Nginx) onto separate hosts and
-handle the configuration appropriately.
-- Handle WordPress upgrades automatically.
 
-We would love to see contributions and improvements, so please fork this
-repository on GitHub and send us your changes via pull requests.
+В процессе подготовки и выполнения задания, были использованы следущие ресурсы:
+    0) https://docs.google.com/document/d/1RWHQucwWsrvFM5k_kGhAka_h9lqvjVWP2Ctxz0RJo1w/edit#heading=h.30j0zll
+    1) https://docs.ansible.com/ansible/2.9/index.html
+    2) https://github.com/leucos/ansible-tuto
+    3) https://www.nginx.com/blog/official-ansible-galaxy-nginx-roles-out-now/
+    4) https://galaxy.ansible.com/nginxinc/nginx
+    5) http://www.linuxsql.ru/content/izuchaem-ansible-playbook-urok-4
+    6) https://stackoverflow.com/questions/26597926/install-mysql-with-ansible-on-ubuntu
+    7) https://github.com/metabrainz
+    8) https://github.com/hrendoh/ansible-wp-nginx-php-fpm 
+
+В процессе поиска ответов на возникающие вопросы нашел 8) сделал флрк и поправил в сооответствии с ДЗ
+yamlint взял из учебника 2) по ансибл 
+
+Все роли выполняются в тестовом окружении vagrant. 
+
+Выполнил Руслан Чирятьев.
+
+

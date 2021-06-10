@@ -1,0 +1,4 @@
+---
+# vars file for backup
+mysqlhome: /var/lib/mysql
+nginxhome: /var/www

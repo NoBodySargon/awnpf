@@ -1,0 +1,9 @@
+---
+# tasks file for backup
+- name: BACK UP our files
+  
+  include_tasks: mysql.yml
+  when: dbbkp is  defined
+  
+- name : BACK UP nginx
+  when: ngbkp is defined

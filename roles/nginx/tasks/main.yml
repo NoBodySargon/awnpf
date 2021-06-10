@@ -1,7 +1,25 @@
 ---
+- name: Backup nginx work dir with archive of main folder of mysql
+  archive: 
+    path: 
+      - /var/www
+    dest: /tmp/{{inventory_hostname}}_mysql-bkp_{{ '%Y-%m-%d' | strftime }}.tar.bz2
+  delegate_to: localhost 
+
+- name: Backup nginx work dir with archive of main folder of mysql
+  copy: 
+    path: 
+      - /etc/nginx/conf.d
+    dest: $HOME/{{inventory_hostname}}/nginx/{{ '%Y-%m-%d' | strftime }}
+
 - name: Install nginx
-  apt: name=nginx update_cache=yes state=present
+  apt: 
+    name: nginx 
+    update_cache: yes 
+    state: present
 
 - name: Copy nginx configuration for wordpress
-  template: src=default.conf dest=/etc/nginx/sites-available/default
+  template: 
+    src: default.conf 
+    dest: /etc/nginx/sites-available/default
   notify: restart nginx

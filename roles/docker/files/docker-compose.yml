@@ -1,0 +1,21 @@
+version: '3'
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro  
+
+ftpd:
+    build: .
+    ports:
+        - "20-21:20-21"
+        - "65500-65515:65500-65515"
+    volumes:
+        - "/tmp:/var/ftp:ro"
+    environment:
+        - FTPD_BANNER=Anonymous FTP server
+        - VIRTUAL_HOST=ftpserver.local
+        - VIRTUAL_PORT=21
+

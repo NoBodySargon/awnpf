@@ -1,14 +1,28 @@
 ---
+- name: Backup files with archive of main folder of mysql
+  archive: 
+    path: /var/lib/mysql
+    dest: /tmp/{{inventory_hostname}}_mysql-bkp_{{ '%Y-%m-%d' | strftime }}.tar.bz2
+  delegate_to: localhost 
+  
 - name: Install Mysql package
-  apt: name={{ item }} update_cache=yes state=present
+  apt: 
+    name: {{ item }} 
+    update_cache: yes 
+    state: present
   with_items:
    - mysql-server
    - python-mysqldb
 
 - name: Create Mysql configuration file
-  template: src=my.cnf.j2 dest=/etc/my.cnf
+  template: 
+    src: my.cnf.j2 
+    dest: /etc/my.cnf
   notify:
   - restart mysql
 
 - name: Start Mysql Service
-  service: name=mysql state=started enabled=yes
+  service: 
+    name: mysql 
+    state: started 
+    enabled: yes
